@@ -29,3 +29,5 @@ Route::get('/policies', [HomeController::class, 'policies'])->name('policies');
 
 Route::get('/settings', [HomeController::class, 'settings'])->name('settings');
 Route::put('/settings', [HomeController::class, 'updateSettings'])->name('settings.update');
+
+Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
