@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/job/{id}', [HomeController::class, 'jobDetails'])->name('job.details');
+
+Route::get('/favorites', [HomeController::class, 'favorites'])->name('favorites');
+
+Route::get('/apply/{id}', [HomeController::class, 'apply'])->name('apply');
+Route::post('/apply', [HomeController::class, 'storeApplication'])->name('apply.store');
+
+Route::get('/faqs', [HomeController::class, 'faqs'])->name('faqs');
+
+Route::get('/policies', [HomeController::class, 'policies'])->name('policies');
+
+Route::get('/settings', [HomeController::class, 'settings'])->name('settings');
+Route::put('/settings', [HomeController::class, 'updateSettings'])->name('settings.update');
