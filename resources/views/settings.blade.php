@@ -13,16 +13,34 @@
             <div class="setting-item">
                 <h3><i class="fas fa-language"></i> اللغة</h3>
                 <div class="language-options">
-                    <button type="button" class="language-btn {{ $settings->language ?? 'ar' === 'ar' ? 'active' : '' }}" data-lang="ar">العربية</button>
-                    <button type="button" class="language-btn {{ $settings->language ?? 'ar' === 'en' ? 'active' : '' }}" data-lang="en">English</button>
-                    <input type="hidden" name="language" id="language-input" value="{{ $settings->language ?? 'ar' }}">
+                    <button type="button" class="language-btn active" data-lang="ar">العربية</button>
+                    <button type="button" class="language-btn" data-lang="en">English</button>
+                    <input type="hidden" name="language" id="language-input" value="ar">
+                </div>
+            </div>
+            
+            <div class="setting-item">
+                <h3><i class="fas fa-briefcase"></i> مجالات العمل المتاحة</h3>
+                <div class="work-fields-list">
+                    @foreach($workFields as $workField)
+                        <span class="field-tag">{{ $workField->name }}</span>
+                    @endforeach
+                </div>
+            </div>
+            
+            <div class="setting-item">
+                <h3><i class="fas fa-graduation-cap"></i> المستويات التعليمية</h3>
+                <div class="education-levels-list">
+                    @foreach($educationLevels as $level)
+                        <span class="level-tag">{{ $level->level_name }}</span>
+                    @endforeach
                 </div>
             </div>
             
             <div class="setting-item">
                 <h3><i class="fas fa-bell"></i> الإشعارات</h3>
                 <label class="switch">
-                    <input type="checkbox" name="notifications" {{ $settings->notifications ?? true ? 'checked' : '' }}>
+                    <input type="checkbox" name="notifications" checked>
                     <span class="slider round"></span>
                 </label>
             </div>

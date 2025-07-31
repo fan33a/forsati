@@ -4,53 +4,57 @@
 
 @section('content')
     <div class="job-details card">
-        <h1 class="job-title">{{ $job->title ?? 'مطور ويب وجوال' }}</h1>
-        <p class="company-name"><i class="fas fa-building"></i> {{ $job->company ?? 'PURE for IT Solutions' }}</p>
+        <h1 class="job-title">{{ $job->title }}</h1>
+        <p class="company-name"><i class="fas fa-building"></i> {{ $job->company->name ?? 'شركة غير محددة' }}</p>
         
         <div class="details-section">
             <h2><i class="fas fa-info-circle"></i> معلومات الوظيفة</h2>
             <div class="details-grid">
                 <div class="detail-item">
                     <i class="fas fa-globe"></i>
-                    <span>{{ $job->location ?? 'الكويت' }}</span>
+                    <span>{{ $job->work_place }}</span>
                 </div>
                 <div class="detail-item">
                     <i class="fas fa-money-bill-wave"></i>
-                    <span>{{ $job->salary ?? '2.5K - 5K د.ك / شهر' }}</span>
+                    <span>{{ $job->salary_range }}</span>
                 </div>
                 <div class="detail-item">
                     <i class="fas fa-briefcase"></i>
-                    <span>{{ $job->experience ?? '3 سنوات خبرة' }}</span>
+                    <span>{{ $job->work_experience }} سنوات خبرة</span>
+                </div>
+                <div class="detail-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>من {{ $job->from_date }} إلى {{ $job->to_date }}</span>
                 </div>
             </div>
         </div>
         
         <div class="details-section">
-            <h2><i class="fas fa-tools"></i> المهارات المطلوبة</h2>
-            <div class="skills-tags">
-                @if(isset($job->skills) && is_array($job->skills))
-                    @foreach($job->skills as $skill)
-                        <span class="skill-tag">{{ $skill }}</span>
-                    @endforeach
-                @else
-                    <span class="skill-tag">Java</span>
-                    <span class="skill-tag">JavaScript</span>
-                    <span class="skill-tag">Bootstrap</span>
-                    <span class="skill-tag">PHP</span>
-                @endif
+            <h2><i class="fas fa-file-alt"></i> وصف الوظيفة</h2>
+            <div class="job-description">
+                <p>{{ $job->description }}</p>
             </div>
         </div>
         
         <div class="details-section">
-            <h2><i class="fas fa-user-tie"></i> متطلبات المرشح</h2>
+            <h2><i class="fas fa-tools"></i> تفاصيل إضافية</h2>
             <div class="requirements">
-                <p><strong>الجنسية:</strong> {{ $job->nationality ?? 'الكويت، فلسطين، الهند' }}</p>
-                <p><strong>الجنس:</strong> {{ $job->gender ?? 'الكل' }}</p>
+                <p><strong>مجال العمل:</strong> {{ $job->workField->name ?? 'غير محدد' }}</p>
+                <p><strong>المستوى التعليمي:</strong> {{ $job->educationLevel->level_name ?? 'غير محدد' }}</p>
+                <p><strong>تفضيل الجنس:</strong> 
+                    @if($job->gender_preference == 'male')
+                        ذكور
+                    @elseif($job->gender_preference == 'female')
+                        إناث
+                    @else
+                        الكل
+                    @endif
+                </p>
             </div>
         </div>
         
         <div class="apply-section">
-            <a href="{{ route('apply', $job->id ?? 1) }}" class="btn btn-primary">تقديم على الوظيفة</a>
+            <a href="{{ route('apply', $job->id) }}" class="btn btn-primary">تقديم على الوظيفة</a>
         </div>
     </div>
 @endsection 

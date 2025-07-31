@@ -6,7 +6,7 @@
     <h1 class="page-title">الأسئلة الشائعة</h1>
     
     <div class="faq-container">
-        @foreach($faqs ?? [] as $faq)
+        @forelse($faqs as $faq)
             <div class="faq-item card">
                 <div class="faq-question">
                     <h3>{{ $faq->question }}</h3>
@@ -16,29 +16,11 @@
                     <p>{{ $faq->answer }}</p>
                 </div>
             </div>
-        @endforeach
-
-        @if(empty($faqs))
-            <div class="faq-item card">
-                <div class="faq-question">
-                    <h3>ما هو Fursati؟</h3>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>Fursati هو منصة للوظائف تساعد الباحثين عن عمل في العثور على فرص عمل مناسبة وتساعد الشركات في العثور على مواهب مميزة.</p>
-                </div>
+        @empty
+            <div class="no-faqs">
+                <p>لا توجد أسئلة شائعة متاحة حالياً</p>
             </div>
-            
-            <div class="faq-item card">
-                <div class="faq-question">
-                    <h3>كيف يمكنني التقديم على الوظائف؟</h3>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    <p>يمكنك التقديم على الوظائف من خلال النقر على زر "تقديم على الوظيفة" في صفحة تفاصيل الوظيفة ورفع الفيديو المطلوب.</p>
-                </div>
-            </div>
-        @endif
+        @endforelse
     </div>
 @endsection
 

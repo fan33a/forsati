@@ -5,11 +5,11 @@
 @section('content')
     <div class="apply-container card">
         <h1 class="page-title">التقديم على الوظيفة</h1>
-        <p class="job-applying-for">{{ $job->title ?? 'مطور ويب وجوال' }} - {{ $job->company ?? 'PURE for IT Solutions' }}</p>
+        <p class="job-applying-for">{{ $job->title }} - {{ $job->company->name ?? 'شركة غير محددة' }}</p>
         
         <form action="{{ route('apply.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" name="job_id" value="{{ $job->id ?? 1 }}">
+            <input type="hidden" name="job_id" value="{{ $job->id }}">
             
             <div class="upload-section">
                 <h2><i class="fas fa-video"></i> رفع فيديو التقديم</h2>
